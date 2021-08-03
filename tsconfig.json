@@ -1,0 +1,33 @@
+{
+    "compilerOptions": {
+        "sourceMap": true,
+        "strict": true,
+        "noImplicitAny": true,
+        "module": "esnext",
+        "target": "es6",
+        "jsx": "react",
+        "allowSyntheticDefaultImports": true,
+        "esModuleInterop": true,
+        "experimentalDecorators": true,
+        "moduleResolution": "Node",
+        "baseUrl": ".",
+        "paths": {
+            "~/*": ["src/*"],
+            "~pages/*": ["src/pages/*"],
+            "~components/*": ["src/components/*"],
+            "~reducers/*": ["src/reducers/*"],
+            "~sagas/*": ["src/sagas/*"],
+            "~routes/*": ["src/routes/*"],
+            "~imgs/*": ["src/assets/images/*"],
+            "~js/*": ["src/assets/js/*"],
+            "~css/*": ["src/assets/css/*"],
+            "~assets/*": ["src/assets/*"],
+            "~apis/*": ["src/apis/*"],
+            "~utils/*": ["src/utils/*"],
+            "~store": ["src/store/index"]
+        },
+    },
+    "exclude": [
+        "node_modules"
+    ]
+}

@@ -22,7 +22,7 @@ module.exports = merge(common, {
                 include: path.resolve(__dirname, '../src')
             },
             {
-                test: /\.(eot|ttf|svg|woff|woff2)$/,
+                test: /\.(eot|ttf|svg|woff|woff2|otf)$/,
                 use: {
                     loader: 'file-loader',
                     options: {
@@ -32,27 +32,36 @@ module.exports = merge(common, {
             },
             {
                 test: /\.(css|less)$/,
-                exclude: path.resolve(__dirname, '../src'),
+                include: path.resolve(__dirname, '../src'),
                 use: [
+                    'style-loader',
                     {
-                        loader: 'style-loader',
+                        loader: 'css-loader',
                         options: {
-                            esModule: true
+                            modules: {
+                                localIdentName: '[local]--[contentHash:base64:5]'
+                            },
                         }
                     },
+                    'less-loader'
+                ]
+            },
+            {
+                test: /\.(css|less)$/,
+                exclude: path.resolve(__dirname, '../src'),
+                use: [
+                    'style-loader',
                     'css-loader',
                     {
                         loader: 'less-loader',
                         options: {
-                            javascriptEnabled: true
+                            javascriptEnabled: true,
+                            modifyVars: {
+                                "@disabled-color": "#000"
+                            }
                         }
                     }
                 ]
-            },
-            {
-                test: /\.(less|css)$/,
-                include: path.resolve(__dirname, '../src'),
-                use: "happypack/loader?id=style"
             },
             {
                 test: /\.(png|jpg|gif|jpeg)$/,
@@ -84,33 +93,6 @@ module.exports = merge(common, {
                     loader: 'ts-loader',
                     options:{
                         happyPackMode: true
-                    }
-                }
-            ],
-            threadPool: happyThreadPool
-        }),
-        new HappyPack({
-            id: 'style',
-            loaders: [
-                {
-                    loader: 'style-loader',
-                    options: {
-                        esModule: true
-                    }
-                },
-                {
-                    loader: 'css-loader',
-                    options: {
-                        modules: {
-                            localIdentName: '[local]--[contentHash:base64:5]'
-                        },
-                    }
-                },
-                'postcss-loader',
-                {
-                    loader: 'less-loader',
-                    options: {
-                        javascriptEnabled: true
                     }
                 }
             ],

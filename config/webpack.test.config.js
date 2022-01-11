@@ -76,7 +76,7 @@ module.exports = merge(common, {
                 include: path.resolve(__dirname, '../src'),
             },
             {
-                test: /\.(eot|ttf|svg|woff|woff2)$/,
+                test: /\.(eot|ttf|svg|woff|woff2|otf)$/,
                 use: {
                     loader: 'file-loader',
                     options: {
@@ -93,7 +93,10 @@ module.exports = merge(common, {
                     {
                         loader: 'less-loader',
                         options: {
-                            javascriptEnabled: true
+                            javascriptEnabled: true,
+                            modifyVars: {
+                                "@disabled-color": "#000"
+                            }
                         }
                     }
                 ]
@@ -112,12 +115,7 @@ module.exports = merge(common, {
                         }
                     },
                     'postcss-loader',
-                    {
-                        loader: 'less-loader',
-                        options: {
-                            javascriptEnabled: true
-                        }
-                    }
+                    'less-loader'
                 ]
             },
             {
